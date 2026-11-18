@@ -1,0 +1,18 @@
+# Local secrets and machine-specific files
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx
+*.key
+*.log
+.DS_Store
+Thumbs.db
+# Avoid accidentally committing raw APEX exports / database backups
+f[0-9]*.sql
+*.dmp
+*.bak
+# Original security-unreviewed archive (already committed historic file is NOT covered)
+al-fattah-erp.zip
+# Sanctioned, reviewed source releases must be committed explicitly after review
