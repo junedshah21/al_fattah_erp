@@ -30,6 +30,10 @@ This is a **public project overview**, not a verified installable release. The s
 
 **Security:** The potentially unsafe `al-fattah-erp.zip` was removed from the current main branch in security commit `668b8df97f778ef1ddf357dace79051ce4d7003d`. Earlier Git history may still retain the archive, and its exact contents were not independently inspected. Do not download/reuse any credentials. Owner action to revoke/rotate keys and assess historical exposure remains required; see [SECURITY.md](SECURITY.md). A sanitized source release will only be included after comprehensive review.
 
+## Export configuration review
+
+The owner-supplied APEX export also contains inactive-or-possibly-active API integrations and an unconditional `return true;` administration authorization scheme. Do **not** infer from the public login-free demo that all APIs are absent or access controls are secure. See [verified APEX configuration findings](docs/APEX_EXPORT_FINDINGS.md). The live website was not changed.
+
 ## Public-release safety checks
 
 Before adding application exports or releases, run the offline check: `python scripts/check_public_release.py .` and tests: `python -m unittest discover -s tests -v`. This only detects a limited set of risks; see [release checklist](docs/RELEASE_CHECKLIST.md). Historical Git objects and revoked/rotated credentials need independent review.
