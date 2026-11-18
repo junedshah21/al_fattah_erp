@@ -19,6 +19,14 @@ Nonzero status means review or block. The script prints file paths and finding c
 
 **Limitations:** This is not comprehensive secret detection, a Git history scanner, binary embedded-asset analysis, SQL parser, code safety proof, or redistribution/license authorization. Scanning the current checkout cannot detect secrets retained in prior Git commits, cached objects, downloads or forks.
 
+## Confirmed source-specific review findings
+
+- Two configured authentication schemes, one selected for public access; a second Oracle APEX Accounts scheme is defined but not shown as active.
+- Administration Rights scheme evaluates `return true;`, which does not implement an administrative privilege check.
+- Two external web sources and literal API key values are present in the supplied export, independent of whether features are currently used on the public demo.
+
+Read [APEX export findings](APEX_EXPORT_FINDINGS.md). Do not change the deployed Oracle APEX application based on static findings alone.
+
 ## Required manual release review
 
 1. Rotate/revoke any historically exposed OpenAI/RapidAPI credentials in the provider consoles and replace usages in live APEX with protected server-side credentials. Review billing/usage logs.
