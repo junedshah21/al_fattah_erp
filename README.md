@@ -36,7 +36,7 @@ The owner-supplied APEX export also contains inactive-or-possibly-active API int
 
 ## Public-release safety checks
 
-Before adding application exports or releases, run the offline check: `python scripts/check_public_release.py .` and tests: `python -m unittest discover -s tests -v`. This only detects a limited set of risks; see [release checklist](docs/RELEASE_CHECKLIST.md). Historical Git objects and revoked/rotated credentials need independent review.
+Before adding application exports or releases, run the offline check: `python scripts/check_public_release.py .` and tests: `python -m unittest discover -s tests -v`. The guard also flags the known unconditional `Administration Rights` APEX authorization expression in export SQL. This only detects a limited set of risks; see [release checklist](docs/RELEASE_CHECKLIST.md). Historical Git objects and revoked/rotated credentials need independent review.
 
 ## Project status
 

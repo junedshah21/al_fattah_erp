@@ -48,6 +48,26 @@ class ReleaseGuardTest(unittest.TestCase):
             summary = "\n".join(f"{p}: {reason}" for p, reason in guard.scan(f))
             self.assertNotIn(secret, summary)
 
+    def test_unconditional_admin_auth_rejected(self):
+        with TemporaryDirectory() as d:
+            f = Path(d) / "sanitized_apex.sql"
+            f.write_text("wwv_flow_imp_shared.create_security_scheme(\n"
+                         " p_name=>'Administration Rights'\n"
+                         ",p_scheme_type=>'NATIVE_FUNCTION_BODY'\n"
+                         ",p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(\n"
+                         "  'plsql_function_body', 'return true;')).to_clob\n"
+                         ");")
+            self.assertIn("apex_unconditional_admin_access", [x[1] for x in guard.scan(f)])
+
+    def test_authorization_not_flagged_when_false(self):
+        with TemporaryDirectory() as d:
+            f = Path(d) / "sanitized_apex.sql"
+            f.write_text("wwv_flow_imp_shared.create_security_scheme(\n"
+                         " p_name=>'Administration Rights'\n"
+                         ",p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(\n"
+                         " 'plsql_function_body', 'return false;')).to_clob);")
+            self.assertNotIn("apex_unconditional_admin_access", [x[1] for x in guard.scan(f)])
+
     def test_missing_path_error(self):
         self.assertEqual(guard.main(["/path/not/really/present/erp-check"]), 2)
 

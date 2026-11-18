@@ -17,6 +17,7 @@ RULES = {
     "aws_access_key": re.compile(rb"\b(?:AKIA|ASIA)[A-Z0-9]{16}\b"),
     "private_key_header": re.compile(rb"-----BEGIN (?:RSA |EC |OPENSSH |DSA |ENCRYPTED )?PRIVATE KEY-----"),
     "rapidapi_inline_header": re.compile(rb"(?i)(?:x-rapidapi-key)[^\r\n]{0,220}?(?:p_value\s*=>\s*'[^']{12,}'|[:=]\s*['\"]?[a-z0-9_-]{25,})"),
+    "apex_unconditional_admin_access": re.compile(rb"(?is)create_security_scheme\s*\(.{0,1100}?p_name\s*=>\s*\x27Administration Rights\x27.{0,650}?\x27plsql_function_body\x27\s*,\s*\x27return\s+true\s*;\s*\x27"),
 }
 IGNORE_PARTS = {".git", ".venv", "__pycache__", "node_modules", ".pytest_cache"}
 MAX_BYTES = 25 * 1024 * 1024
