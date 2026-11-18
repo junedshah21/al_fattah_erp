@@ -68,6 +68,23 @@ class ReleaseGuardTest(unittest.TestCase):
                          " 'plsql_function_body', 'return false;')).to_clob);")
             self.assertNotIn("apex_unconditional_admin_access", [x[1] for x in guard.scan(f)])
 
+    def test_rapidapi_multiline_apex_export(self):
+        with TemporaryDirectory() as d:
+            f = Path(d) / "review.sql"
+            f.write_text(" p_name=>'x-rapidapi-key'\n"
+                         ",p_static_id=>'x-rapidapi-key'\n"
+                         ",p_param_type=>'HEADER'\n"
+                         ",p_data_type=>'VARCHAR2'\n"
+                         ",p_default_value_type=>'STATIC'\n"
+                         ",p_value=>'" + "a" * 32 + "'\n")
+            self.assertIn("rapidapi_inline_header", [x[1] for x in guard.scan(f)])
+
+    def test_rapidapi_without_value_not_flagged(self):
+        with TemporaryDirectory() as d:
+            f = Path(d) / "review.sql"
+            f.write_text(" p_name=>'x-rapidapi-key'\n,p_param_type=>'HEADER'\n")
+            self.assertNotIn("rapidapi_inline_header", [x[1] for x in guard.scan(f)])
+
     def test_missing_path_error(self):
         self.assertEqual(guard.main(["/path/not/really/present/erp-check"]), 2)
 
