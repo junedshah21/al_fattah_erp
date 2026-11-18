@@ -16,3 +16,10 @@ f[0-9]*.sql
 # Original security-unreviewed archive (already committed historic file is NOT covered)
 al-fattah-erp.zip
 # Sanctioned, reviewed source releases must be committed explicitly after review
+
+# Unreviewed archives and exports should never be committed directly
+*.zip
+*.7z
+*.rar
+*.dmp
+*.bak
