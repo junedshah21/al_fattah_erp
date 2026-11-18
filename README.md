@@ -28,7 +28,7 @@ Oracle APEX, Oracle Database, SQL and PL/SQL. The export uses native APEX pages,
 
 This is a **public project overview**, not a verified installable release. The source export may reference external services, workspace credentials, static assets and database objects unavailable in the export. The exported SQL has **no standalone CREATE TABLE DDL** according to a simple text scan, so it is not sufficient evidence of a full installable ERP database.
 
-**Security:** The potentially unsafe `al-fattah-erp.zip` was removed from the current main branch in security commit `668b8df97f778ef1ddf357dace79051ce4d7003d`. Earlier Git history may still retain the archive, and its exact contents were not independently inspected. Do not download/reuse any credentials. Owner action to revoke/rotate keys and assess historical exposure remains required; see [SECURITY.md](SECURITY.md). A sanitized source release will only be included after comprehensive review.
+**Security:** The potentially unsafe `al-fattah-erp.zip` was removed from the current main branch in security commit `668b8df97f778ef1ddf357dace79051ce4d7003d`. Earlier Git history may still retain the archive, and its exact contents were not independently inspected. Do not download/reuse any credentials. Owner action to revoke/rotate keys and assess historical exposure remains required; see [SECURITY.md](SECURITY.md) and the [security response playbook](docs/SECURITY_RESPONSE_PLAYBOOK.md). A sanitized source release will only be included after comprehensive review.
 
 ## Export configuration review
 
