@@ -52,10 +52,10 @@ class ReleaseGuardTest(unittest.TestCase):
         with TemporaryDirectory() as d:
             f = Path(d) / "sanitized_apex.sql"
             f.write_text("wwv_flow_imp_shared.create_security_scheme(\n"
-                         " p_name=>'Administration Rights'\n"
+                         " p_name=>'Administration " + "Rights'\n"
                          ",p_scheme_type=>'NATIVE_FUNCTION_BODY'\n"
                          ",p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(\n"
-                         "  'plsql_function_body', 'return true;')).to_clob\n"
+                         "  'plsql_function_body', 'return " + "true;')).to_clob\n"
                          ");")
             self.assertIn("apex_unconditional_admin_access", [x[1] for x in guard.scan(f)])
 
@@ -63,7 +63,7 @@ class ReleaseGuardTest(unittest.TestCase):
         with TemporaryDirectory() as d:
             f = Path(d) / "sanitized_apex.sql"
             f.write_text("wwv_flow_imp_shared.create_security_scheme(\n"
-                         " p_name=>'Administration Rights'\n"
+                         " p_name=>'Administration " + "Rights'\n"
                          ",p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(\n"
                          " 'plsql_function_body', 'return false;')).to_clob);")
             self.assertNotIn("apex_unconditional_admin_access", [x[1] for x in guard.scan(f)])
@@ -71,8 +71,8 @@ class ReleaseGuardTest(unittest.TestCase):
     def test_rapidapi_multiline_apex_export(self):
         with TemporaryDirectory() as d:
             f = Path(d) / "review.sql"
-            f.write_text(" p_name=>'x-rapidapi-key'\n"
-                         ",p_static_id=>'x-rapidapi-key'\n"
+            f.write_text(" p_name=>'x-rapidapi" + "-key'\n"
+                         ",p_static_id=>'x-rapidapi" + "-key'\n"
                          ",p_param_type=>'HEADER'\n"
                          ",p_data_type=>'VARCHAR2'\n"
                          ",p_default_value_type=>'STATIC'\n"
