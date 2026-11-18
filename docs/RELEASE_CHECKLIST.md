@@ -36,3 +36,7 @@ Read [APEX export findings](APEX_EXPORT_FINDINGS.md). Do not change the deployed
 5. Publish a sanitized export only after those gates pass, with an explicit license and tested installation instructions.
 
 Local QA on the initial guard implementation (Python 3 runtime in tool environment): **8 unit tests passed**, plus a clean-sample scan passed; the original owner-uploaded `f238769.sql` was blocked because it is an unreviewed raw export. The guard also blocks the known unsafe `Administration Rights` function body `return true;` in raw APEX export SQL. A targeted real-export assertion and two synthetic examples verified this rule's intended behavior; the whole revised Git checkout test suite is not yet independently executed. The script does not establish that the public ZIP (since deleted from current main) had identical bytes.
+
+## Historical credential incident
+
+Provider-side credential revocation and old Git history risk remain pending. See [owner security response playbook](SECURITY_RESPONSE_PLAYBOOK.md). Do not mark the incident resolved based solely on a deletion commit or a passing local scanner.

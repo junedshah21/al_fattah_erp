@@ -13,3 +13,7 @@ A static review of the Oracle APEX export `f238769.sql` identified **two inline 
 Do **not** post credential values in public issues or pull requests. Report suspected security problems privately to the repository owner.
 
 A redacted export is for review only; a successful pattern replacement is **not** evidence of complete secret removal or import readiness.
+
+## Owner remediation procedure
+
+Follow the [provider key rotation and historical Git exposure playbook](docs/SECURITY_RESPONSE_PLAYBOOK.md). No provider keys have been revoked by repository changes, and the live APEX application remains unchanged.
